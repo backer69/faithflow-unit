@@ -1,46 +1,855 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FaithFlow Unit | Portfolio Officiel</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="icon" href="logo.png" />
-</head>
-<body class="bg-gray-950 text-white font-sans">
-
-  <header class="fixed top-0 left-0 w-full bg-gray-900 bg-opacity-80 backdrop-blur-md shadow-md z-50">
-    <div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
-      <h1 class="text-2xl font-bold text-cyan-400">FaithFlow Unit</h1>
-      <nav class="hidden md:flex space-x-6 text-gray-200">
-        <a href="#home" class="hover:text-cyan-400 transition">Accueil</a>
-        <a href="#about" class="hover:text-cyan-400 transition">À propos</a>
-        <a href="#music" class="hover:text-cyan-400 transition">Musique</a>
-        <a href="#tech" class="hover:text-cyan-400 transition">Tech</a>
-        <a href="#evangelisation" class="hover:text-cyan-400 transition">Évangélisation</a>
-        <a href="#blog" class="hover:text-cyan-400 transition">Blog</a>
-        <a href="#contact" class="hover:text-cyan-400 transition">Contact</a>
-      </nav>
-       <div class="flex items-center space-x-4">
-         <button id="translate-btn-mobile" class="md:hidden text-white focus:outline-none text-sm bg-gray-700 hover:bg-gray-600 px-2 py-1 rounded">
-            🌐 Traduire
-         </button>
-         <button class="md:hidden text-white focus:outline-none" id="menu-btn">☰</button>
-       </div>
-      <button class="md:hidden text-white focus:outline-none" id="menu-btn">☰</button>
-    </div>
-    <div id="mobile-menu" class="hidden bg-gray-800 md:hidden px-6 pb-4 space-y-2">
-      <a href="#home" class="block text-gray-300 hover:text-cyan-400">Accueil</a>
-      <a href="#about" class="block text-gray-300 hover:text-cyan-400">À propos</a>
-      <a href="#music" class="block text-gray-300 hover:text-cyan-400">Musique</a>
-      <a href="#tech" class="block text-gray-300 hover:text-cyan-400">Tech</a>
-      <a href="#evangelisation" class="block text-gray-300 hover:text-cyan-400">Évangélisation</a>
-      <a href="#blog" class="block text-gray-300 hover:text-cyan-400">Blog</a>
-      <a href="#contact" class="block text-gray-300 hover:text-cyan-400">Contact</a>
-    </div>
-  </header>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FaithFlow Unit</title>
+  <meta name="description" content="FaithFlow Unit — Amiel Backer | Musique • Évangélisation • Jeunesse" />
 
  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0b0f12;
+      --panel:#0f1316;
+      --muted:#9aa4a6;
+      --accent:#26d07b;
+      --glass: rgba(255,255,255,0.03);
+      --card:#0d1113;
+      --radius:14px;
+      --maxw:1100px;
+    }
+    *{
+      box-sizing:border-box
+    }
+    html,body{
+      height:100%
+    }
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg,#0b0f12 0%, #0e1316 60%, #0b0f12 100%);
+      color:#e6eef0;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+    }
+    .wrap{
+      max-width:var(--maxw); 
+      margin:36px auto; 
+      padding:24px; 
+      position:relative
+    }
+    header{
+      display:flex; 
+      align-items:center; 
+      justify-content:space-between; 
+      gap:20px;
+      padding:12px 8px; 
+      border-radius:12px; 
+      background:linear-gradient(90deg, rgba(255,255,255,0.02), transparent);
+      backdrop-filter: blur(6px);
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px
+    }
+    .logo{
+      width:56px; 
+      height:56px; 
+      border-radius:12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: radial-gradient(circle at 30% 20%, rgba(38,208,123,0.18), transparent 30%), linear-gradient(135deg,#0f6b3f,#2ad986);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+      font-weight:800; 
+      font-size:20px; 
+      color:white;
+    }
+    .brand h1{
+      margin:0;
+      font-size:18px;
+      letter-spacing:0.4px
+    }
+    .brand p{
+      margin:0;
+      font-size:12px;
+      color:var(--muted)
+    }
+
+    nav{
+      display:flex;
+      gap:12px; 
+      align-items:center
+    }
+    nav a{
+      color:var(--muted); 
+      text-decoration:none; 
+      font-size:14px; 
+      padding:8px 10px; 
+      border-radius:8px
+    }
+    nav a:hover{
+      color:white;
+      background:var(--glass)
+    }
+
+    .actions{
+      display:flex;
+      align-items:center;
+      gap:8px
+    }
+    .btn{
+      padding:8px 12px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,0.04);
+      background:transparent;
+      color:var(--accent);
+      font-weight:600;
+      text-decoration:none;
+      cursor:pointer;
+    }
+    .btn.primary{
+      background:linear-gradient(90deg,var(--accent), #20b96b); 
+      color:#02110a; 
+      box-shadow:0 8px 30px rgba(38,208,123,0.12)
+    }
+    .hero{
+      margin-top:18px; 
+      padding:36px; 
+      border-radius:18px; 
+      overflow:hidden;
+      display:grid; 
+      grid-template-columns:1fr 380px; gap:28px; 
+      align-items:center;
+      background:
+        radial-gradient(800px 200px at -10% 10%, rgba(38,208,123,0.02), transparent 6%),
+        linear-gradient(180deg, rgba(255,255,255,0.02), transparent 40%),
+        url('assets/hero-placeholder.jpg') center/cover no-repeat;
+      border: 1px solid rgba(255,255,255,0.03);
+    }
+
+    .hero .left h2{
+      font-size:44px;
+      margin:0 0 10px 0;
+      line-height:1;
+      letter-spacing:-1px
+    }
+    .hero .left p{
+      color:var(--muted); 
+      margin:0 0 18px 0
+    }
+    .controls{
+      display:flex;
+      gap:12px
+    }
+    .pill{
+      display:inline-flex;
+      gap:8px;
+      align-items:center
+      ;padding:10px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.02);
+      font-weight:600
+    }
+
+    .profile{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:12px; 
+      text-align:center;
+      padding:18px; 
+      border-radius:12px; 
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.03);
+    }
+    .profile img{
+      width:220px;
+      height:220px;
+      border-radius:18px;
+      object-fit:cover;
+      box-shadow:0 20px 40px rgba(0,0,0,0.6)
+    }
+    .profile h3{
+      margin:6px 0 0 0
+    }
+    .profile p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px
+    }
+    section.block{
+      margin-top:26px;
+      padding:22px;
+      border-radius:14px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
+      border:1px solid rgba(255,255,255,0.02)
+    }
+    .grid-3{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px
+    }
+    .card{
+      padding:16px;
+      border-radius:12px;
+      background:var(--card);
+      border:1px solid rgba(255,255,255,0.02)
+    }
+    .muted{
+      color:var(--muted);
+      font-size:13px
+    }
+
+    .media-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:16px
+    }
+
+    .event{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px
+    }
+    .event .left{
+      flex:1
+    }
+    .tag{
+      display:inline-block;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.03);
+      font-size:13px
+    }
+    .testimonials{
+      display:flex;
+      gap:12px;
+      overflow:auto;
+      padding-bottom:8px
+    }
+    .test{
+      min-width:260px;
+      padding:12px;
+      border-radius:10px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
+      border:1px solid rgba(255,255,255,0.02)
+    }
+
+    .blog-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:14px
+    }
+
+    .socials{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap
+    }
+    .socials a{
+      padding:8px 12px;
+      border-radius:8px;
+      background:rgba(255,255,255,0.02);
+      text-decoration:none;
+      color:var(--muted)
+    }
+
+    footer{
+      margin-top:32px;
+      padding:18px;
+      border-radius:12px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
+      text-align:center;
+      color:var(--muted);
+      font-size:13px
+    }
+
+    @media (max-width:980px){
+      .hero{
+        grid-template-columns:1fr; 
+        text-align:center
+      }
+      .profile img{
+        width:180px;
+        height:180px
+      }
+      header{
+        flex-direction:column;
+        gap:12px
+      }
+      nav{
+        flex-wrap:wrap;
+        justify-content:center}
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrap" role="main">
+
+    <header>
+      <div class="brand">
+        <div class="logo">
+          <img src="Screenshot 2025-09-04 151726 (1)_processed.png" alt="" width="60" height="60" style="border-radius: 15px;">
+        </div>
+        <div>
+          <h1>FaithFlow Unit</h1>
+          <p data-i18n="tagline">Foi · Jeunesse · Créativité</p>
+        </div>
+      </div>
+
+      <nav aria-label="Main navigation">
+        <a href="#home" data-i18n="nav_home">Accueil</a>
+        <a href="#about" data-i18n="nav_about">À propos</a>
+        <a href="#music" data-i18n="nav_music">Musique</a>
+        <a href="#evangelism" data-i18n="nav_evangelism">Évangélisation</a>
+        <a href="#blog" data-i18n="nav_blog">Blog</a>
+        <a href="#contact" data-i18n="nav_contact">Contact</a>
+      </nav>
+
+      <div class="actions">
+        <button id="langBtn" class="btn" aria-label="Change language">EN</button>
+        <a class="btn primary" href="#contact" data-i18n="cta_contact">Nous écrire</a>
+      </div>
+    </header>
+
+    <section id="home" class="hero" aria-labelledby="hero-title">
+      <div class="left">
+        <h2 id="hero-title" data-i18n="hero_title">La jeunesse qui inspire une génération</h2>
+        <p data-i18n="hero_sub">FaithFlow Unit — musique gospel, slam et rap pour toucher les cœurs et servir la communauté.</p>
+
+        <div class="controls">
+          <a class="pill" id="playVideo" role="button" aria-haspopup="dialog" data-i18n="play_video">▶ Vidéo</a>
+          <a class="pill" href="#music" data-i18n="listen" style="text-decoration: none; color: white;">Écouter</a>
+          <a class="pill" href="#evangelism" data-i18n="projects" style="text-decoration: none; color: white;">Nos projets</a>
+        </div>
+
+        <div
+         style="margin-top:18px;
+         display:flex;
+         gap:12px;
+         align-items:center;">
+          <div
+           style="background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);
+           padding:10px;
+           border-radius:10px;">
+            <div
+            style="font-size:12px;
+            color:var(--muted)" data-i18n="founder_label">Fondateur</div>
+            <div 
+            style="font-weight:700">Backer69</div>
+          </div>
+
+          <div style="background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:10px;border-radius:10px;">
+            <div style="font-size:12px;color:var(--muted)" data-i18n="style_label">Style</div>
+            <div style="font-weight:700" data-i18n="style_value">Rap · Gospel · Slam</div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="profile" aria-labelledby="profile-name">
+        <img id="profileImg" src="IMG_20250831_105459_850.jpg" alt="Amiel Backer portrait">
+        <h3 id="profile-name">FaithFlow</h3>
+        <p data-i18n="profile_role">Créatifs • Musiciens • Serviteurs communautaires</p>
+        <div style="display:flex;gap:8px;margin-top:6px;">
+          <a href="#music" class="btn">Musique</a>
+          <a href="#contact" class="btn">Contact</a>
+        </div>
+      </aside>
+    </section>
+
+    <section id="about" class="block" aria-labelledby="about-title">
+      <h3 id="about-title" style="margin:0 0 12px 0">À propos</h3>
+      <div 
+      style="display:grid;
+      grid-template-columns:2fr 1fr;
+      gap:18px;
+      align-items:start">
+        <div>
+          <p class="muted" data-i18n="about_text">Amiel Backer est un jeune leader spirituel, introverti mais visionnaire. Son ministère mêle musique, technologie et actions sociales pour impacter la jeunesse. Dons spirituels: enseignement, exhortation, louange.</p>
+
+          <div 
+          style="margin-top:12px;
+          display:flex;
+          gap:10px;
+          flex-wrap:wrap">
+            <div class="tag" data-i18n="value_auth">Authenticité</div>
+            <div class="tag" data-i18n="value_youth">Jeunesse</div>
+            <div class="tag" data-i18n="value_trans">Transformation</div>
+          </div>
+        </div>
+
+        <aside 
+        style="padding:12px;
+        border-radius:10px;
+        background:var(--glass);
+        border:1px solid rgba(255,255,255,0.02)">
+          <strong data-i18n="quote_label">Citation</strong>
+          <blockquote style="margin:8px 0 0 0;color:var(--muted);font-style:italic" data-i18n="quote_text">"La foi qui bouge les cœurs se traduit par des actions concrètes."</blockquote>
+
+          <div style="margin-top:12px">
+            <div class="muted" data-i18n="traits_label">Traits</div>
+            <ul 
+            style="margin:8px 0 0 16px;
+            color:var(--muted);
+            padding:0;
+            line-height:1.6">
+              <li data-i18n="trait_1">Introverti réservé</li>
+              <li data-i18n="trait_2">Leadership créatif</li>
+              <li data-i18n="trait_3">Passion pour la musique et la communauté</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="music" class="block" aria-labelledby="music-title">
+      <div 
+      style="display:flex;
+      justify-content:space-between;
+      align-items:center">
+        <h3 id="music-title">Musique</h3>
+        <a href="#" class="muted" data-i18n="see_all">Voir tout</a>
+      </div>
+
+      <div style="margin-top:12px" class="media-grid" id="musicList">
+      </div>
+    </section>
+
+    <section id="evangelism" class="block" aria-labelledby="ev-title">
+      <h3 id="ev-title">Évangélisation & Projets</h3>
+      <div 
+      style="display:grid;
+      grid-template-columns:1fr 360px;
+      gap:16px;
+      margin-top:12px">
+        <div>
+          <p class="muted" data-i18n="ev_text">Initiatives: sport, visites en hôpitaux, ateliers pour jeunes et actions communautaires. Foi active se traduit par service.</p>
+
+          <div 
+          style="margin-top:12px;
+          display:flex;
+          flex-direction:column;
+          gap:12px" 
+          id="eventsList">
+          </div>
+        </div>
+
+        <aside>
+          <div class="card">
+            <h4 data-i18n="testi_title">Témoignages</h4>
+            <div class="testimonials" id="testimonials">
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:12px">
+            <h4 data-i18n="partners">Partenariats</h4>
+            <p class="muted" style="margin-top:8px" data-i18n="partners_text">Envie de collaborer ? Contactez-nous via WhatsApp ou Instagram.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="blog" class="block" aria-labelledby="blog-title">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <h3 id="blog-title">Blog & Exhortations</h3>
+        <a href="#" class="muted" data-i18n="all_articles">Tous les articles</a>
+      </div>
+
+      <div style="margin-top:12px" class="blog-grid" id="blogList">
+      </div>
+    </section>
+
+    <section id="contact" class="block" aria-labelledby="contact-title">
+      <h3 id="contact-title">Contact & Réseaux</h3>
+      <div style="display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap;margin-top:12px">
+        <div style="flex:1;min-width:260px">
+          <p class="muted" data-i18n="contact_text">Pour collaborations, booking ou prières — contactez Amiel.</p>
+
+          <div style="margin-top:12px" class="socials">
+            <a href="https://wa.me/250700000000" target="_blank" rel="noreferrer">WhatsApp</a>
+            <a href="https://instagram.com/faithflowunit" target="_blank" rel="noreferrer">Instagram</a>
+            <a href="https://YouTube.com" target="_blank" rel="noreferrer">YouTube</a>
+          </div>
+        </div>
+
+        <div style="min-width:280px">
+          <label class="muted" for="email">Newsletter</label>
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <input id="email" placeholder="Votre email" style="flex:1;padding:10px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.04);color:inherit"/>
+            <button class="btn primary" id="subBtn" data-i18n="subscribe">S'abonner</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>&copy; <span id="year"></span> FaithFlow Unit — <span data-i18n="rights">Tous droits réservés</span></div>
+    </footer>
+
+  </div>
+
+  <div id="videoModal" role="dialog" aria-modal="true" 
+  style="display:none;
+  position:fixed;
+  inset:0;
+  z-index:1000;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,0,0,0.7);">
+    <div 
+    style="width:90%;
+    max-width:900px;
+    background:#050607;
+    padding:14px;
+    border-radius:12px;
+    position:relative">
+      <button id="closeVideo" aria-label="Close" 
+      style="position:
+      absolute;
+      right:12px;
+      top:12px;
+      background:transparent;
+      border:none;
+      color:#fff;
+      font-size:18px;
+      cursor:pointer">✕</button>
+      <video id="heroVideo" controls 
+      style="width:100%;
+      border-radius:8px">
+        <source src="https___selfany.com_3MonthTraining — your exclusive link to access this training ! #ewuramatunes.mp4" type="video/mp4">
+        Votre navigateur ne supporte pas la vidéo.
+      </video>
+    </div>
+  </div>
+
+  <script>
+    const DATA = {
+      music: [
+        {
+          id:1, 
+          title_fr:"Nziza (Original)", 
+          title_en:"Nziza (Original)", 
+          type:"Clip", 
+          desc_fr:"Une ballade gospel qui élève les cœurs.", 
+          desc_en:"A gospel ballad that lifts hearts."
+        },
+        {
+          id:2, 
+          title_fr:"Slam of Grace", 
+          title_en:"Slam of Grace", 
+          type:"Live", 
+          desc_fr:"Performance slam en direct.", 
+          desc_en:"Live slam performance."
+        },
+        {
+          id:3, 
+          title_fr:"Instrumental Flow", 
+          title_en:"Instrumental Flow", 
+          type:"Beat", 
+          desc_fr:"Instrumental pour meditations et louange.", 
+          desc_en:"Instrumental for meditation and worship."
+        },
+        {
+          id:5, 
+          title_fr:"Instrumental Flow", 
+          title_en:"Instrumental Flow", 
+          type:"Beat", 
+          desc_fr:"Instrumental pour meditations et louange.", 
+          desc_en:"Instrumental for meditation and worship."
+        },
+        {
+          id:6, 
+          title_fr:"Instrumental Flow", 
+          title_en:"Instrumental Flow", 
+          type:"Beat", 
+          desc_fr:"Instrumental pour meditations et louange.", 
+          desc_en:"Instrumental for meditation and worship."
+        }
+      ],
+      events: [
+        {
+          id:1, 
+          title_fr:"Worship Night — Youth Edition", 
+          title_en:"Worship Night — Youth Edition", 
+          date:"12 Oct 2025", 
+          location:"Bujumbura City Hall"
+        },
+        {
+          id:2, 
+          title_fr:"Community Outreach: Sports & Hope", 
+          title_en:"Community Outreach: Sports & Hope", 
+          date:"02 Nov 2025", 
+          location:"Turame Field"
+        },
+        {
+          id:3, 
+          title_fr:"compassion group", 
+          title_en:"compassion group", 
+          date:"10 Dec 2025", 
+          location:"YFC - head office"
+        },
+        
+      ],
+      testimonials: [
+        {
+          id:1, 
+          text_fr:"\"La musique d'Amiel nous a rapprochés de Dieu et de notre communauté.\" — Jean", 
+          text_en:"\"Amiel's music brought us closer to God and our community.\" — Jean"
+        },
+        {
+          id:2, 
+          text_fr:"\"Un message vrai et profond.\" — Marie", 
+          text_en:"\"A true and deep message.\" — Marie"
+        },
+        {
+          id:2, 
+          text_fr:"\"Un message vrai et profond.\" — Marie", 
+          text_en:"\"A true and deep message.\" — Marie"
+        },
+        {
+          id:2, 
+          text_fr:"\"Un message vrai et profond.\" — Marie", 
+          text_en:"\"A true and deep message.\" — Marie"
+        }
+      ],
+      blog: [
+        {
+          id:1, 
+          title_fr:"Le courage d'être vrai", 
+          title_en:"The Courage to Be Real", 
+          excerpt_fr:"Réflexions sur l'authenticité et la foi.",
+          excerpt_en:"Reflections on authenticity and faith."
+        },
+        {
+          id:2, 
+          title_fr:"Paroles: Nziza", 
+          title_en:"Lyrics: Nziza", 
+          excerpt_fr:"Les paroles complètes et les notes sur l'écriture.", 
+          excerpt_en:"Full lyrics and songwriting notes."
+        },
+        {
+          id:3, 
+          title_fr:"Slam: Histoire et prière", 
+          title_en:"Slam: Story & Prayer", 
+          excerpt_fr:"Poèmes et performances qui parlent au cœur.", 
+          excerpt_en:"Poems and performances that speak to the heart."
+        },
+        {
+          id:3, 
+          title_fr:"Slam: Histoire et prière", 
+          title_en:"Slam: Story & Prayer", 
+          excerpt_fr:"Poèmes et performances qui parlent au cœur.", 
+          excerpt_en:"Poems and performances that speak to the heart."
+        },
+        {
+          id:3, 
+          title_fr:"Slam: Histoire et prière", 
+          title_en:"Slam: Story & Prayer", 
+          excerpt_fr:"Poèmes et performances qui parlent au cœur.", 
+          excerpt_en:"Poems and performances that speak to the heart."
+        },
+        {
+          id:3, 
+          title_fr:"Slam: Histoire et prière", 
+          title_en:"Slam: Story & Prayer", 
+          excerpt_fr:"Poèmes et performances qui parlent au cœur.", 
+          excerpt_en:"Poems and performances that speak to the heart."
+        },
+        {
+          id:3, 
+          title_fr:"Slam: Histoire et prière", 
+          title_en:"Slam: Story & Prayer", 
+          excerpt_fr:"Poèmes et performances qui parlent au cœur.", 
+          excerpt_en:"Poems and performances that speak to the heart."
+        }
+      ]
+    };
+
+    const LANG = { current: 'fr' };
+    const strings = {
+      fr: {
+        nav_home:'Accueil', nav_about:'À propos', nav_music:'Musique', nav_evangelism:'Évangélisation', nav_blog:'Blog', nav_contact:'Contact',
+        tagline:'Foi · Jeunesse · Créativité',
+        hero_title:'La jeunesse qui inspire une génération',
+        hero_sub:'FaithFlow — musique gospel, slam et rap pour toucher les cœurs et servir la communauté.',
+        play_video:'▶ Vidéo', listen:'Écouter', projects:'Nos projets',
+        founder_label:'Fondateur', style_label:'Style', style_value:'Rap · Gospel · Slam',
+        about_text:'Amiel Backer est un jeune leader spirituel, introverti mais visionnaire. Son ministère mêle musique, technologie et actions sociales pour impacter la jeunesse. Dons spirituels: enseignement, exhortation, louange.',
+        value_auth:'Authenticité', value_youth:'Jeunesse', value_trans:'Transformation',
+        quote_label:'Citation', quote_text:'"La foi qui bouge les cœurs se traduit par des actions concrètes."',
+        traits_label:'Traits', trait_1:'Introverti réservé', trait_2:'Leadership créatif', trait_3:'Passion pour la musique et la communauté',
+        see_all:'Voir tout', ev_text:'Initiatives: sport, visites en hôpitaux, ateliers pour jeunes et actions communautaires. Foi active se traduit par service.',
+        testi_title:'Témoignages', partners:'Partenariats', partners_text:'Envie de collaborer ? Contactez-nous via WhatsApp ou Instagram.',
+        all_articles:'Tous les articles',
+        contact_text:'Pour collaborations, booking ou prières — contactez Amiel.',
+        subscribe:'S\'abonner',
+        rights:'Christ Au Centre',
+        cta_contact:'Nous écrire'
+      },
+      en: {
+        nav_home:'Home', nav_about:'About', nav_music:'Music', nav_evangelism:'Evangelism', nav_blog:'Blog', nav_contact:'Contact',
+        tagline:'Faith · Youth · Creativity',
+        hero_title:'youth that inspires a generation',
+        hero_sub:'FaithFlow — gospel, slam and rap to touch hearts and serve community.',
+        play_video:'▶ Watch', listen:'Listen', projects:'Projects',
+        founder_label:'Founder', style_label:'Style', style_value:'Rap · Gospel · Slam',
+        about_text:'Amiel Backer is a young spiritual leader — introverted yet visionary. His ministry combines music, tech and social action to impact youth. Spiritual gifts: teaching, exhortation, worship.',
+        value_auth:'Authenticity', value_youth:'Youth', value_trans:'Transformation',
+        quote_label:'Quote', quote_text:'"Faith that moves hearts is translated into concrete actions."',
+        traits_label:'Traits', trait_1:'Reserved introvert', trait_2:'Creative leadership', trait_3:'Passion for music and community',
+        see_all:'See all', ev_text:'Initiatives: sports, hospital visits, youth workshops and community actions. Active faith becomes service.',
+        testi_title:'Testimonials', partners:'Partnerships', partners_text:'Want to collaborate? Reach out via WhatsApp or Instagram.',
+        all_articles:'All articles',
+        contact_text:'For collaborations, booking or prayers — contact Amiel.',
+        subscribe:'Subscribe',
+        rights:'All rights reserved',
+        cta_contact:'Contact us'
+      }
+    };
+
+    function translateTo(lang){
+      LANG.current = lang;
+      document.querySelectorAll('[data-i18n]').forEach(el=>{
+        const key = el.getAttribute('data-i18n');
+        if(strings[lang] && strings[lang][key]!=null){
+          el.textContent = strings[lang][key];
+        }
+      });
+      populateMusic();
+      populateEvents();
+      populateTestimonials();
+      populateBlogs();
+
+      document.getElementById('langBtn').textContent = (lang === 'fr') ? 'EN' : 'FR';
+    }
+
+    function populateMusic(){
+      const container = document.getElementById('musicList');
+      container.innerHTML = '';
+      DATA.music.forEach(m=>{
+        const title = (LANG.current==='fr') ? m.title_fr : m.title_en;
+        const desc = (LANG.current==='fr') ? m.desc_fr : m.desc_en;
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <div 
+          style="height:140px;
+          border-radius:10px;
+          background:linear-gradient(90deg, rgba(0,0,0,0.3), rgba(255,255,255,0.01));
+          display:flex;
+          align-items:center;
+          justify-content:center">${m.type}</div>
+          <h4 style="margin:12px 0 6px 0">${escapeHtml(title)}</h4>
+          <div class="muted" style="font-size:13px">${escapeHtml(desc)}</div>
+          <div 
+          style="margin-top:10px;
+          display:flex;gap:8px">
+            <button class="btn" onclick="playSample(${m.id})">Play</button>
+            <button class="btn" onclick="shareItem('music',${m.id})">Partager</button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function populateEvents(){
+      const c = document.getElementById('eventsList');
+      c.innerHTML = '';
+      DATA.events.forEach(ev=>{
+        const title = LANG.current==='fr' ? ev.title_fr : ev.title_en;
+        const div = document.createElement('div');
+        div.className = 'event card';
+        div.innerHTML = `
+          <div class="left">
+            <div style="font-weight:700">${escapeHtml(title)}</div>
+            <div class="muted" style="font-size:13px">${escapeHtml(ev.date)} • ${escapeHtml(ev.location)}</div>
+          </div>
+          <div><button class="btn primary" onclick="rsvp(${ev.id})" data-i18n="rsvp_btn">${LANG.current==='fr' ? 'Participer' : 'Join'}</button></div>
+        `;
+        c.appendChild(div);
+      });
+    }
+
+    function populateTestimonials(){
+      const t = document.getElementById('testimonials');
+      t.innerHTML = '';
+      DATA.testimonials.forEach(tt=>{
+        const text = LANG.current==='fr' ? tt.text_fr : tt.text_en;
+        const div = document.createElement('div');
+        div.className = 'test';
+        div.innerHTML = `<div style="font-size:14px">${escapeHtml(text)}</div>`;
+        t.appendChild(div);
+      });
+    }
+
+    function populateBlogs(){
+      const b = document.getElementById('blogList');
+      b.innerHTML = '';
+      DATA.blog.forEach(post=>{
+        const title = LANG.current==='fr' ? post.title_fr : post.title_en;
+        const excerpt = LANG.current==='fr' ? post.excerpt_fr : post.excerpt_en;
+        const div = document.createElement('article');
+        div.className = 'card';
+        div.innerHTML = `<h4 style="margin:0 0 8px 0">${escapeHtml(title)}</h4><div class="muted">${escapeHtml(excerpt)}</div><div style="margin-top:10px"><a href="#" class="btn">${LANG.current==='fr' ? 'Lire' : 'Read'}</a></div>`;
+        b.appendChild(div);
+      });
+    }
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    document.getElementById('langBtn').addEventListener('click', ()=>{
+      translateTo(LANG.current === 'fr' ? 'en' : 'fr');
+    });
+
+    document.getElementById('playVideo').addEventListener('click', ()=>{
+      document.getElementById('videoModal').style.display = 'flex';
+      const v = document.getElementById('heroVideo');
+      try{ v.currentTime = 0; v.play(); }catch(e){}
+    });
+
+    document.getElementById('closeVideo').addEventListener('click', ()=>{
+      const modal = document.getElementById('videoModal');
+      const v = document.getElementById('heroVideo');
+      v.pause();
+      modal.style.display = 'none';
+    });
+
+    function playSample(id){ alert((LANG.current==='fr'?'Lecture du morceau ':'Playing track ') + id); }
+    function shareItem(type,id){ alert((LANG.current==='fr'?'Partager ':'Share ') + type + ' #' + id); }
+    function rsvp(id){ alert((LANG.current==='fr'?'Merci! Vous êtes inscrit(e) à l\'événement ':'Thanks! You are registered for event ') + id); }
+
+ 
+    function escapeHtml(str){
+      if(!str) return '';
+      return String(str).replace(/[&<>"']/g, (m) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+    }
+
+    translateTo('fr');
+    populateMusic();
+    populateEvents();
+    populateTestimonials();
+    populateBlogs();
+
+    document.addEventListener('keydown', (e) => {
+      if(e.key === 'Escape'){
+        const modal = document.getElementById('videoModal');
+        if(modal.style.display === 'flex'){
+          document.getElementById('closeVideo').click();
+        }
+      }
+    });
+
+  </script>
+</body>
+</html> 
   <section id="home" class="h-screen flex flex-col justify-center items-center text-center px-6">
     <h2 class="text-4xl md:text-6xl font-bold text-cyan-400">FaithFlow Unit</h2>
     <p class="mt-4 text-lg md:text-xl text-gray-300 max-w-xl">
@@ -135,5 +944,6 @@
   </script>
 </body>
 </html>
+
 
 
